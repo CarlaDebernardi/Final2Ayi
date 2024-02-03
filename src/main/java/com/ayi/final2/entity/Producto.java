@@ -17,15 +17,14 @@ import java.io.Serializable;
 public class Producto implements Serializable{
     private static final Long serialVersionUID = 1L;
     @Id
+    @Column(name = "id_productos")
     @NotNull
     @PositiveOrZero(message = "Debe ingresar un número positivo entero, a partir de 0")
-    @Max( value=5, message="Debe contener 5 dígitos")
-    @Min( value=5, message="Debe contener 5 dígitos")
-    @Column(name = "id_producto")
+    @Min (value = 5, message= "Debe tener 5 dígitos")
     private Integer plu;
     @Column(name = "codigo_ean")
     @NotEmpty
-    @Size (min=2, max=20, message = "Debe contener entre dos y 20 caracteres")
+    @Size (min=10, max=20, message = "Debe contener entre dos y 20 dígitos")
     private String codigoEan;
     @NotEmpty
     @Size (min=2, max=20, message = "Debe contener entre dos y 20 caracteres")
