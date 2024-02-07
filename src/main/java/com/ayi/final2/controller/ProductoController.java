@@ -1,6 +1,5 @@
 package com.ayi.final2.controller;
 
-import com.ayi.final2.entity.Cliente;
 import com.ayi.final2.entity.Producto;
 import com.ayi.final2.exception.ClienteNotFoundException;
 import com.ayi.final2.service.IProductoService;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/producto")
 public class ProductoController {
@@ -53,7 +52,7 @@ public class ProductoController {
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Producto producto) {
         try {
-            return new ResponseEntity(productoService.modificarCliente(id, producto), HttpStatus.OK);
+            return new ResponseEntity(productoService.modificarProducto(id, producto), HttpStatus.OK);
         } catch (ClienteNotFoundException clienteNotFoundException) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El código PLU ingresado no corresponde a un producto registrado.");
         } catch (ResponseStatusException e) {
@@ -61,8 +60,8 @@ public class ProductoController {
         }
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> delete (@RequestParam Integer id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete (@PathVariable Integer id) {
         try {
             if (id == null || id.describeConstable().isEmpty()) {
                 throw new IllegalArgumentException("El código PLU no puede estat vacío.");}

@@ -1,6 +1,7 @@
 package com.ayi.final2.service.implementation;
 
 import com.ayi.final2.entity.Cliente;
+import com.ayi.final2.entity.Producto;
 import com.ayi.final2.exception.ClienteNotFoundException;
 import com.ayi.final2.repository.IClienteRepository;
 import com.ayi.final2.service.IClienteService;
@@ -52,8 +53,8 @@ public class ClienteServiceImpl implements IClienteService {
     @Override
     @Transactional
     public Cliente modificarCliente(Integer id, Cliente cliente){
-        try {
-            Optional <Cliente> optionalCliente = Optional.ofNullable(clienteRepository.getReferenceById(id));
+        Optional<Cliente> optionalCliente = clienteRepository.findById(id);
+        if (optionalCliente.isPresent()) {
             Cliente clienteUpdate = optionalCliente.get();
             if(cliente.getNombre() != null){
                 clienteUpdate.setNombre(cliente.getNombre());
@@ -71,7 +72,7 @@ public class ClienteServiceImpl implements IClienteService {
                 clienteUpdate.setTelefono(cliente.getTelefono());
             }
             return clienteRepository.save(clienteUpdate);
-        } catch (ClienteNotFoundException e){
+        } else{
             throw new ClienteNotFoundException("El legajo ingresado no correspondo a ningún empleado registrado.");
         }
     }

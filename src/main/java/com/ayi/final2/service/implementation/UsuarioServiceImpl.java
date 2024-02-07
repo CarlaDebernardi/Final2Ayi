@@ -16,8 +16,11 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
     @Override
     @Transactional
-    public Usuario encontrarUsuario2(String nombre, String password) {
-        Usuario user = usuarioRepository.findByNombreUsuario(nombre);
+    public Usuario encontrarUsuario(Usuario usuario) {
+        Usuario user = usuarioRepository.findByNombreUsuario(usuario.getNombre());
         return user;
+
     }
+
+
 }

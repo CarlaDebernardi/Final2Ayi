@@ -50,9 +50,10 @@ public class ProductoServiceImpl implements IProductoService {
 
     @Override
     @Transactional
-    public Producto modificarCliente(Integer id, Producto producto){
-        try {
-            Optional <Producto> optionalProducto = Optional.ofNullable(productoRepository.getReferenceById(id));
+    public Producto modificarProducto(Integer id, Producto producto){
+
+        Optional<Producto> optionalProducto = productoRepository.findById(id);
+        if (optionalProducto.isPresent()) {
             Producto productoUpdate = optionalProducto.get();
             if(producto.getNombre() != null){
                 productoUpdate.setNombre(producto.getNombre());
@@ -74,7 +75,7 @@ public class ProductoServiceImpl implements IProductoService {
                 productoUpdate.setStock(producto.getStock());
             }
             return productoRepository.save(productoUpdate);
-        } catch (ProductoNotFoundException e){
+        }else {
             throw new ProductoNotFoundException("El código ingresado no correspondo a ningún producto registrado.");
         }
     }

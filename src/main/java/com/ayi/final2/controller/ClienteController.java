@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
@@ -59,8 +59,8 @@ public class ClienteController {
         }
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> delete (@RequestParam Integer id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete (@PathVariable Integer id) {
         try {
             if (id == null || id.describeConstable().isEmpty()) {
                 throw new IllegalArgumentException("El Id no puede estat vacío.");}

@@ -23,8 +23,7 @@ public class Producto implements Serializable{
     @Min (value = 5, message= "Debe tener 5 dígitos")
     private Integer plu;
     @Column(name = "codigo_ean")
-    @NotEmpty
-    @Size (min=10, max=20, message = "Debe contener entre dos y 20 dígitos")
+
     private String codigoEan;
     @NotEmpty
     @Size (min=2, max=20, message = "Debe contener entre dos y 20 caracteres")

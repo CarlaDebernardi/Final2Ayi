@@ -18,6 +18,7 @@ public interface IProductoService {
     @Transactional
     Producto encontrarProducto(Integer id);
 
+
     @Transactional
-    Producto modificarCliente(Integer id, Producto producto);
+    Producto modificarProducto(Integer id, Producto producto);
 }
